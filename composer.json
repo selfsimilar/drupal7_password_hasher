@@ -2,7 +2,7 @@
     "name": "selfsimilar/drupal7_password_hasher",
     "type": "library",
     "time" : "2020-11-03",
-    "license" : "GPLv3",
+    "license" : "GPL-3.0-or-later",
     "description": "Drupal 7 password hasher wrapped in a properly namespaced class wrapper.",
     "keywords": ["hasher", "crypt", "password", "security", "drupal"],
     "homepage": "http://github.com/selfsimilar/drupal7_password_hasher/",
