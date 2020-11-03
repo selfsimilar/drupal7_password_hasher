@@ -5,8 +5,8 @@ Drupal 7 Password Hasher
 
 This is the Drupal 7 password hasher code, reformatted in to a PSR-4 compliant
 library class for use in PHP projects that need to import legacy Drupal 7 user
-accounts. Drupal 7 is licensed under the GPLv3, and as this mostly borrow that
-code, I have licensed this code similarly. Thanks to
+accounts. Drupal 7 is licensed under the GPLv3, and as this borrows directly
+from that code, I have licensed this code similarly. Thanks to
 [HauteLook](https://github.com/hautelook) for the
 [Modernized Openwall Phpass](https://github.com/hautelook/phpass) package for
 inspiration.
@@ -33,6 +33,7 @@ $passwordHasher = new Hasher();
 $password = $passwordHasher->HashPassword('secret');
 var_dump($password);
 
-$passwordMatch = $passwordHasher->CheckPassword('secret', "$2a$08$0RK6Yw6j9kSIXrrEOc3dwuDPQuT78HgR0S3/ghOFDEpOGpOkARoSu");
+$passwordMatch = $passwordHasher->CheckPassword('secret',
+  "$2a$08$0RK6Yw6j9kSIXrrEOc3dwuDPQuT78HgR0S3/ghOFDEpOGpOkARoSu");
 var_dump($passwordMatch);
 ```
