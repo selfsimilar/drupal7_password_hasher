@@ -1,74 +1,38 @@
-Laravel Drupal 7 Password
+Drupal 7 Password Hasher
 ===================
 
-[![Build Status](https://img.shields.io/travis/selfsimilar/laravel-drupal7-password/master.svg?style=flat-square)](https://travis-ci.org/selfsimilar/laravel-drupal7-password)
+[![Build Status](https://img.shields.io/travis/selfsimilar/drupal7_password_hasher/master.svg?style=flat-square)](https://travis-ci.org/selfsimilar/drupal7_password_hasher)
 
-This Laravel 8 package provides an easy way to create and check against Drupal 7 password hashes. Drupal is not required.
-
-
-Installation
-------------
-
-#### Step 1: Composer
-
-Begin by installing this package through Composer. Edit your project's `composer.json` file to require `selfsimilar/laravel-drupal7-password`.
-
-```json
-"require": {
-  "selfsimilar/laravel-drupal7-password": "~1.0.0"
-}
-```
-
-Next, update Composer from the Terminal:
-
-```shell
-composer update
-```
-
-#### Step 2: Register Laravel Service Provider
-
-Once this operation completes, the final step is to add the service provider.
-
-* **Laravel 5.x**: Open `config/app.php`, and add a new item to the providers array
-* **Laravel 4.x**: Open `app/config/app.php`, and add a new item to the providers array
-
-```php
-'Selfsimilar\D7Password\D7PasswordProvider'
-```
-
+This is the Drupal 7 password hasher code, reformatted in to a PSR-4 compliant
+library class for use in PHP projects that need to import legacy Drupal 7 user
+accounts. Drupal 7 is licensed under the GPLv3, and as this mostly borrow that
+code, I have licensed this code similarly. Thanks to
+[HauteLook](https://github.com/hautelook) for the
+[Modernized Openwall Phpass](https://github.com/hautelook/phpass) package for
+inspiration.
 
 Usage
 -----
 
-Add a **use statement** for the D7Password facade
-
 ```php
-use Selfsimilar\D7Password\Facades\D7Password;
+<?php
+
+namespace Your\Namespace;
+
+use Selfsimilar\D7PasswordHasher\Hasher;
+
+require_once(__DIR__ . "/vendor/autoload.php");
+
+// Constructor take the iteration count for number of cycles to hash, but by
+// default uses the Drupal 7 stock number. You may need to check your Drupal 7
+// installation for the value of `password_count_log2` (e.g. `drush
+// variable-get password_count_log2`). If it is set and different than 15,
+// you will need to pass it to the Hasher() constructor.
+$passwordHasher = new Hasher();
+
+$password = $passwordHasher->HashPassword('secret');
+var_dump($password);
+
+$passwordMatch = $passwordHasher->CheckPassword('secret', "$2a$08$0RK6Yw6j9kSIXrrEOc3dwuDPQuT78HgR0S3/ghOFDEpOGpOkARoSu");
+var_dump($passwordMatch);
 ```
-
-### `make()` - Create Password Hash
-
-Similar to the Drupal [`user_hash_password()`](https://api.drupal.org/api/drupal/includes%21password.inc/function/user_hash_password/7.x) function
-
-```php
-$hashed_password = D7Password::make('plain-text-password');
-```
-
-### `check()` - Check Password Hash
-
-Similar to the Drupal [`user_check_password()`](https://api.drupal.org/api/drupal/includes%21password.inc/function/user_check_password/7.x) function
-
-```php
-$password = 'plain-text-password';
-$d7_hashed_password = '$S$B7TRc6vrwCfjgKLZLgmN.dmPo6msZR.';
-
-if ( D7Password::check($password, $d7_hashed_password) ) {
-    // Password success!
-} else {
-    // Password failed :(
-}
-```
-
-### Dependency Injection
-
-I used a facade above to simplify the documentation.  If you'd prefer not to use the facade, you can inject the following interface: `Selfsimilar\D7Password\Contracts\D7Password`.

@@ -4,7 +4,7 @@
 // [password.inc](https://api.drupal.org/api/drupal/includes%21password.inc/7.x)
 // which is itself // is a slightly modified version of
 // [Phpass](https://github.com/hautelook/phpass)
-// I have lightly modified the code to make it compatible with class encapsulation.
+// I have lightly modified the code to make it PSR-4 compatible.
 
 namespace Selfsimilar\D7PasswordHasher;
 
