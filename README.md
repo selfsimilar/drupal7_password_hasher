@@ -1,7 +1,7 @@
 Drupal 7 Password Hasher
 ===================
 
-[![Build Status](https://img.shields.io/travis/selfsimilar/drupal7_password_hasher/main.svg?style=flat-square)](https://travis-ci.org/selfsimilar/drupal7_password_hasher)
+[![Build Status](https://travis-ci.org/selfsimilar/drupal7_password_hasher.svg?branch=main)](https://travis-ci.org/selfsimilar/drupal7_password_hasher)
 
 This is the Drupal 7 password hasher code, reformatted in to a PSR-4 compliant
 library class for use in PHP projects that need to import legacy Drupal 7 user
